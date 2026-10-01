@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Husnain — MNH76</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Jost:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#000;
+  --panel:#0c0a06;
+  --panel-2:#14100a;
+  --gold:#c9a45c;
+  --gold-hi:#f3d98b;
+  --gold-lo:#7a5a1f;
+  --ivory:#f4ecd8;
+  --muted:#a89877;
+  --ok:#8fcf9f;
+  --bad:#e58a8a;
+  --foil:linear-gradient(135deg,#7a5a1f 0%,#f3d98b 32%,#c9a45c 55%,#fff1c2 72%,#8a6a2b 100%);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Jost','Helvetica Neue',Arial,sans-serif;
+  --urdu:'Noto Naskh Arabic','Segoe UI',Tahoma,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--black);color:var(--ivory);
+  font-family:var(--sans);font-weight:300;line-height:1.65;
+  overflow-x:hidden;
+}
+html[lang="ur"] body,
+html[lang="ur"] button,
+html[lang="ur"] input{font-family:var(--urdu);font-weight:400;line-height:1.9}
+button,input{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+.foil{background:var(--foil);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- Header ---------- */
+header.top{
+  position:fixed;top:0;left:0;right:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px clamp(16px,4vw,48px);
+  background:rgba(0,0,0,.72);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(201,164,92,.28);
+}
+.brand{
+  font-family:var(--serif);font-weight:700;font-size:1.45rem;letter-spacing:.16em;
+  text-decoration:none;display:inline-block;min-width:6.4em;direction:ltr;text-align:left;
+}
+.bcur{
+  display:inline-block;width:2px;height:1em;background:var(--gold);
+  margin-left:4px;vertical-align:-.12em;animation:blink 1s steps(1) infinite;
+}
+@keyframes blink{50%{opacity:0}}
+.dev{margin-top:6px;color:var(--gold);font-size:.92rem}
+.addrow{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;align-items:center}
+.addrow input{
+  flex:1 1 150px;background:rgba(255,255,255,.04);border:1px solid rgba(201,164,92,.4);
+  padding:10px 14px;border-radius:2px;
+}
+.add-title{font-family:var(--serif);font-weight:600;font-size:1.4rem;margin-bottom:10px}
+html[lang="ur"] .add-title{font-family:var(--urdu)}
+.links{display:flex;gap:22px}
+.links a{text-decoration:none;color:var(--muted);transition:color .25s}
+.links a:hover{color:var(--gold-hi)}
+.actions{display:flex;gap:10px;align-items:center}
+.pill{
+  background:transparent;border:1px solid rgba(201,164,92,.55);border-radius:999px;
+  padding:7px 18px;cursor:pointer;transition:background .25s,color .25s;
+  font-size:.92rem;white-space:nowrap;
+}
+.pill:hover{background:rgba(201,164,92,.16)}
+.pill.solid{background:var(--gold);color:#000;border-color:var(--gold);font-weight:500}
+.pill.solid:hover{background:var(--gold-hi)}
+
+/* ---------- Hero ---------- */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:110px 24px 90px;position:relative;
+  background:radial-gradient(ellipse at 50% 42%,rgba(201,164,92,.13),transparent 62%);
+}
+.welcome{
+  font-family:var(--serif);font-size:clamp(1.2rem,3.6vw,1.7rem);color:var(--gold);
+  letter-spacing:.9em;opacity:0;
+  animation:welcomeIn 2.4s cubic-bezier(.2,.7,.2,1) .2s forwards;
+}
+html[lang="ur"] .welcome{font-family:var(--urdu);letter-spacing:.1em}
+@keyframes welcomeIn{
+  from{opacity:0;letter-spacing:1.2em;filter:blur(8px)}
+  to{opacity:1;letter-spacing:.38em;filter:blur(0)}
+}
+html[lang="ur"] .welcome{animation-name:welcomeInUr}
+@keyframes welcomeInUr{
+  from{opacity:0;filter:blur(8px);transform:translateY(10px)}
+  to{opacity:1;filter:blur(0);transform:none}
+}
+.hero .rule{
+  width:0;height:1px;background:var(--foil);margin:26px 0;
+  animation:ruleGrow 1.6s ease 1.4s forwards;
+}
+@keyframes ruleGrow{to{width:min(260px,55vw)}}
+.hero h1{
+  font-family:var(--serif);font-weight:600;line-height:1;
+  font-size:clamp(4.2rem,17vw,12rem);
+  background:var(--foil);background-size:250% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:0;animation:nameIn 2s ease 1.9s forwards, shimmer 3.2s ease 2.2s 1 forwards;
+}
+html[lang="ur"] .hero h1{font-family:var(--urdu);font-weight:600;line-height:1.5}
+@keyframes nameIn{from{opacity:0;transform:translateY(24px);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes shimmer{from{background-position:120% 0}to{background-position:-20% 0}}
+.hero .lead{
+  max-width:44ch;margin-top:26px;color:var(--muted);font-size:1.08rem;
+  opacity:0;animation:fade 1.4s ease 3s forwards;
+}
+@keyframes fade{to{opacity:1}}
+.cue{
+  position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:var(--muted);font-size:.85rem;text-decoration:none;
+  opacity:0;animation:fade 1.2s ease 3.4s forwards;
+}
+.cue i{display:block;width:1px;height:46px;background:linear-gradient(var(--gold),transparent);animation:drip 2.2s ease-in-out infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ---------- Scroll letters ---------- */
+.letters{height:620vh;position:relative}
+.stick{
+  position:sticky;top:0;height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  overflow:hidden;--lit:0;
+}
+.stick::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 50% 50%,rgba(243,217,139,.22),transparent 60%);
+  opacity:calc(var(--lit) * .2);transition:opacity .6s ease;
+}
+.glyphs{
+  direction:ltr;display:flex;justify-content:center;gap:clamp(4px,1.6vw,26px);
+  width:100%;padding:0 12px;position:relative;
+}
+.g{
+  position:relative;display:block;
+  font-family:var(--serif);font-weight:700;line-height:1;
+  font-size:clamp(3.6rem,17vw,12.5rem);
+  color:transparent;-webkit-text-stroke:1px rgba(201,164,92,.32);
+  padding:0 .02em;
+}
+.g::after{
+  content:attr(data-ch);position:absolute;left:0;top:0;padding:0 .02em;
+  background:var(--foil);-webkit-background-clip:text;background-clip:text;
+  color:transparent;-webkit-text-stroke:0;
+  opacity:0;transform:translateY(40px) scale(.94);filter:blur(14px);
+  transition:opacity .7s ease,transform .8s cubic-bezier(.2,.8,.2,1),filter .8s ease;
+}
+.g.on::after{opacity:1;transform:none;filter:blur(0)}
+.caption{
+  margin-top:clamp(20px,4vw,40px);text-align:center;
+  font-family:var(--serif);font-size:clamp(1.3rem,3.6vw,2rem);color:var(--gold-hi);
+  opacity:0;transform:translateY(12px);transition:opacity .8s ease,transform .8s ease;
+  padding:0 20px;
+}
+html[lang="ur"] .caption{font-family:var(--urdu)}
+.caption.show{opacity:1;transform:none}
+.dots{display:flex;gap:10px;margin-top:28px;direction:ltr}
+.dots i{width:8px;height:8px;border-radius:50%;border:1px solid var(--gold);transition:background .4s}
+.dots i.on{background:var(--gold)}
+
+/* ---------- Services ---------- */
+.services{
+  padding:110px 20px 100px;display:flex;justify-content:center;
+  background:radial-gradient(ellipse at 50% 0%,rgba(201,164,92,.12),transparent 60%);
+}
+.svc{width:100%;max-width:640px}
+.svc h2{
+  font-family:var(--serif);font-weight:600;line-height:1.1;
+  font-size:clamp(2.2rem,7vw,3.6rem);margin-bottom:34px;
+}
+html[lang="ur"] .svc h2{font-family:var(--urdu);line-height:1.5}
+.svc ul{list-style:none;border-top:1px solid rgba(201,164,92,.45)}
+.svc li{
+  display:flex;align-items:baseline;justify-content:space-between;gap:20px;
+  padding:22px 2px;border-bottom:1px solid rgba(201,164,92,.45);
+}
+.svc .item{font-family:var(--serif);font-size:clamp(1.4rem,4.5vw,2rem);font-weight:500}
+html[lang="ur"] .svc .item{font-family:var(--urdu)}
+.svc .price{
+  font-family:var(--serif);font-weight:700;font-size:clamp(2rem,7vw,3.2rem);line-height:1;
+  direction:ltr;
+}
+
+/* ---------- Register ---------- */
+.register{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:110px 20px 80px;
+  background:radial-gradient(ellipse at 50% 100%,rgba(201,164,92,.12),transparent 60%);
+}
+.panel{
+  width:100%;max-width:600px;
+  border:1px solid rgba(201,164,92,.5);
+  background:linear-gradient(160deg,var(--panel-2),var(--panel));
+  padding:clamp(26px,5vw,52px);
+  box-shadow:0 0 0 6px #000,0 0 0 7px rgba(201,164,92,.22);
+}
+.panel h2{
+  font-family:var(--serif);font-weight:600;font-size:clamp(1.9rem,5vw,2.6rem);line-height:1.15;
+  margin-bottom:8px;
+}
+html[lang="ur"] .panel h2{font-family:var(--urdu)}
+.panel .sub{color:var(--muted);margin-bottom:30px}
+.field{margin-bottom:22px}
+.field label{display:block;font-size:.92rem;color:var(--muted);margin-bottom:4px}
+.field input{
+  width:100%;background:transparent;border:none;
+  border-bottom:1px solid rgba(201,164,92,.5);padding:10px 2px;font-size:1.1rem;
+  transition:border-color .25s;
+}
+.field input:focus{outline:none;border-bottom-color:var(--gold-hi)}
+.field input::placeholder{color:rgba(168,152,119,.45)}
+.field input.ltr{direction:ltr;text-align:start}
+html[dir="rtl"] .field input.ltr{text-align:right}
+.err{color:var(--bad);font-size:.86rem;min-height:1.3em;margin-top:2px}
+.msg{min-height:1.5em;margin-top:16px;font-size:.96rem}
+.msg.ok{color:var(--ok)}
+.msg.bad{color:var(--bad)}
+.cta{
+  width:100%;margin-top:6px;padding:14px 24px;cursor:pointer;border:none;border-radius:2px;
+  background:var(--foil);background-size:200% 100%;color:#000;font-weight:500;font-size:1rem;
+  letter-spacing:.04em;transition:background-position .5s ease,transform .25s;
+}
+.cta:hover{background-position:100% 0;transform:translateY(-2px)}
+
+footer{
+  text-align:center;color:var(--muted);font-size:.86rem;
+  padding:28px 20px;border-top:1px solid rgba(201,164,92,.22);
+}
+
+/* ---------- Control panel drawer ---------- */
+#scrim{
+  display:none;position:fixed;top:0;right:0;bottom:0;left:0;z-index:40;background:rgba(0,0,0,.7);
+}
+#scrim.open{display:block}
+#drawer{
+  display:none;position:fixed;top:0;bottom:0;right:0;z-index:50;
+  width:100%;max-width:780px;
+  background:#0a0805;
+  border-left:1px solid rgba(201,164,92,.55);
+  overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 clamp(18px,4vw,36px) 48px;
+}
+#drawer.open{display:block;animation:slideIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes slideIn{from{transform:translateX(60px);opacity:0}to{transform:none;opacity:1}}
+html[dir="rtl"] #drawer{right:auto;left:0;border-left:none;border-right:1px solid rgba(201,164,92,.55)}
+html[dir="rtl"] #drawer.open{animation-name:slideInRtl}
+@keyframes slideInRtl{from{transform:translateX(-60px);opacity:0}to{transform:none;opacity:1}}
+.d-head{
+  position:sticky;top:0;z-index:2;background:rgba(10,8,5,.94);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 0 16px;border-bottom:1px solid rgba(201,164,92,.3);margin-bottom:24px;
+}
+.d-head h2{font-family:var(--serif);font-weight:600;font-size:1.9rem}
+html[lang="ur"] .d-head h2{font-family:var(--urdu)}
+.x{
+  width:40px;height:40px;border-radius:50%;cursor:pointer;
+  background:transparent;border:1px solid rgba(201,164,92,.55);font-size:1.3rem;line-height:1;
+  transition:background .25s;
+}
+.x:hover{background:rgba(201,164,92,.18)}
+.login-box{max-width:440px;margin:24px auto 0}
+.login-box .hint{font-size:.86rem;color:var(--muted);margin-top:16px}
+.stats{display:flex;gap:34px;flex-wrap:wrap;margin-bottom:24px}
+.stat b{display:block;font-family:var(--serif);font-size:2.6rem;font-weight:600;line-height:1}
+.stat span{color:var(--muted);font-size:.9rem}
+.tools{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.tools input{
+  flex:1 1 220px;background:rgba(255,255,255,.04);border:1px solid rgba(201,164,92,.4);
+  padding:10px 14px;border-radius:2px;
+}
+.btn{
+  background:transparent;border:1px solid rgba(201,164,92,.6);padding:10px 16px;
+  cursor:pointer;border-radius:2px;transition:background .25s,color .25s;font-size:.92rem;
+}
+.btn:hover{background:var(--gold);color:#000}
+.btn.danger{border-color:rgba(229,138,138,.6)}
+.btn.danger:hover{background:var(--bad);color:#000}
+.table-wrap{overflow-x:auto;border:1px solid rgba(201,164,92,.3)}
+table{width:100%;border-collapse:collapse;min-width:560px}
+th,td{text-align:start;padding:13px 14px;border-bottom:1px solid rgba(201,164,92,.14)}
+th{font-weight:500;color:var(--gold-hi);background:rgba(201,164,92,.08);font-size:.9rem}
+tbody tr:hover{background:rgba(201,164,92,.06)}
+td.num{color:var(--muted);width:44px}
+td.ph{direction:ltr;text-align:start}
+html[dir="rtl"] td.ph{text-align:right}
+.del{background:none;border:none;color:var(--muted);cursor:pointer;padding:6px 8px}
+.del:hover{color:var(--bad)}
+.empty{padding:44px 16px;text-align:center;color:var(--muted)}
+.settings{margin-top:38px;max-width:440px}
+.settings h3{font-family:var(--serif);font-weight:600;font-size:1.5rem;margin-bottom:12px}
+html[lang="ur"] .settings h3{font-family:var(--urdu)}
+.settings .row{display:flex;gap:10px;flex-wrap:wrap}
+.settings input{
+  flex:1 1 200px;background:rgba(255,255,255,.04);border:1px solid rgba(201,164,92,.4);
+  padding:10px 14px;border-radius:2px;
+}
+
+@media (max-width:680px){
+  .links{display:none}
+  .pill{padding:6px 13px;font-size:.85rem}
+  .brand{font-size:1.2rem}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important}
+  .letters{height:auto;padding:80px 0}
+  .stick{position:static;height:auto}
+  .welcome,.hero h1,.hero .lead,.cue{opacity:1}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="brand" href="#top" aria-label="MNH76"><span class="foil" id="brandTxt"></span><span class="bcur"></span></a>
+  <nav class="links">
+    <a href="#top" data-i18n="nav_home">Home</a>
+    <a href="#services" data-i18n="nav_services">Services</a>
+    <a href="#register" data-i18n="nav_register">Register</a>
+  </nav>
+  <div class="actions">
+    <button class="pill" id="langBtn" type="button" aria-label="Language">اردو</button>
+    <button class="pill solid" id="panelBtn" type="button" data-i18n="nav_panel">Control Panel</button>
+  </div>
+</header>
+
+<main id="site">
+  <section class="hero" id="top">
+    <p class="welcome" data-i18n="welcome">Welcome</p>
+    <div class="rule"></div>
+    <h1 data-i18n="name">Husnain</h1>
+    <p class="lead" data-i18n="lead">Welcome by developer Shani</p>
+    <a class="cue" href="#letters"><span data-i18n="scroll">Scroll</span><i></i></a>
+  </section>
+
+  <section class="letters" id="letters" aria-label="M N H 7 6">
+    <div class="stick" id="stick">
+      <div class="glyphs" dir="ltr" aria-hidden="true">
+        <span class="g" data-ch="M">M</span>
+        <span class="g" data-ch="N">N</span>
+        <span class="g" data-ch="H">H</span>
+        <span class="g" data-ch="7">7</span>
+        <span class="g" data-ch="6">6</span>
+      </div>
+      <p class="caption" id="caption" data-i18n="caption">Mechanical Engineering Student</p>
+      <div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="svc">
+      <h2 class="foil" data-i18n="svc_title">Shani, Website Developer</h2>
+      <ul>
+        <li><span class="item" data-i18n="svc_simple">Simple website</span><span class="price foil">$2</span></li>
+        <li><span class="item" data-i18n="svc_pro">Professional website</span><span class="price foil">$10</span></li>
+        <li><span class="item" data-i18n="svc_host">Hosting</span><span class="price foil">$20</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="register" id="register">
+    <div class="panel">
+      <h2 data-i18n="reg_title">Register your details</h2>
+      <p class="sub" data-i18n="reg_sub">Enter your name, father's name and number.</p>
+      <form id="regForm" novalidate>
+        <div class="field">
+          <label for="fName" data-i18n="f_name">Name</label>
+          <input id="fName" type="text" autocomplete="off" data-i18n-ph="ph_name" placeholder="Full name">
+          <div class="err" id="eName"></div>
+        </div>
+        <div class="field">
+          <label for="fFather" data-i18n="f_father">Father's name</label>
+          <input id="fFather" type="text" autocomplete="off" data-i18n-ph="ph_father" placeholder="Father's full name">
+          <div class="err" id="eFather"></div>
+        </div>
+        <div class="field">
+          <label for="fPhone" data-i18n="f_phone">Number</label>
+          <input id="fPhone" class="ltr" type="tel" inputmode="tel" autocomplete="off" placeholder="03XX XXXXXXX">
+          <div class="err" id="ePhone"></div>
+        </div>
+        <button class="cta" type="submit" data-i18n="save">Save</button>
+        <div class="msg" id="regMsg" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer id="foot">
+  <span data-i18n="footer">MNH76 · Husnain</span>
+  <p class="dev" data-i18n="dev">Developed by Shani</p>
+</footer>
+
+<!-- Control panel drawer -->
+<div id="scrim"></div>
+<aside id="drawer" role="dialog" aria-modal="true" aria-labelledby="dTitle" aria-hidden="true">
+  <div class="d-head">
+    <h2 id="dTitle" class="foil" data-i18n="panel_title">Control Panel</h2>
+    <button class="x" id="closeBtn" type="button" aria-label="Close" data-i18n-aria="close">×</button>
+  </div>
+
+  <div id="login" class="login-box">
+    <p class="sub" style="color:var(--muted);margin-bottom:24px" data-i18n="login_sub">Enter the password to continue.</p>
+    <form id="loginForm" novalidate>
+      <div class="field">
+        <label for="lPass" data-i18n="password">Password</label>
+        <input id="lPass" class="ltr" type="password" autocomplete="off">
+        <div class="err" id="eLogin"></div>
+      </div>
+      <button class="cta" type="submit" data-i18n="login">Log in</button>
+    </form>
+    <p class="hint" data-i18n="hint">First password: mnh76. Change it after logging in.</p>
+  </div>
+
+  <div id="dash" hidden>
+    <div class="stats">
+      <div class="stat"><b class="foil" id="sTotal">0</b><span data-i18n="stat_total">Total records</span></div>
+      <div class="stat"><b class="foil" id="sToday">0</b><span data-i18n="stat_today">Today</span></div>
+    </div>
+    <div class="tools">
+      <input type="search" id="search" data-i18n-ph="search_ph" placeholder="Search" aria-label="Search">
+      <button class="btn" id="exportBtn" type="button" data-i18n="export">Download CSV</button>
+      <button class="btn danger" id="clearBtn" type="button" data-i18n="clear">Delete all</button>
+      <button class="btn" id="logoutBtn" type="button" data-i18n="logout">Log out</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th data-i18n="th_name">Name</th>
+            <th data-i18n="th_father">Father's name</th>
+            <th data-i18n="th_phone">Number</th>
+            <th data-i18n="th_date">Date</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="empty" id="empty" hidden></div>
+    </div>
+    <div class="settings">
+      <h3 data-i18n="pass_title">Change password</h3>
+      <form class="row" id="passForm" novalidate>
+        <input type="password" id="newPass" class="ltr" data-i18n-ph="pass_ph" placeholder="New password" aria-label="New password">
+        <button class="btn" type="submit" data-i18n="pass_btn">Change</button>
+      </form>
+      <div class="msg" id="passMsg" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+</aside>
+
+<script>
+(function(){
+  /* ---------- Text ---------- */
+  var T = {
+    en:{
+      nav_home:"Home", nav_register:"Register", nav_panel:"Control Panel",
+      welcome:"Welcome", name:"Husnain",
+      lead:"Welcome by developer Shani",
+      scroll:"Scroll", caption:"Mechanical Engineering Student",
+      reg_title:"Register your details", reg_sub:"Enter your name, father's name and number.",
+      f_name:"Name", f_father:"Father's name", f_phone:"Number",
+      ph_name:"Full name", ph_father:"Father's full name", save:"Save",
+      e_name:"Enter your name.", e_father:"Enter your father's name.",
+      e_phone:"Enter a valid number, like 03001234567.",
+      saved:"Saved. Thank you, {n}.",
+      save_fail:"The browser could not save. Open this page as a file in your browser and try again.",
+      panel_title:"Control Panel", login_sub:"Enter the password to continue.",
+      password:"Password", login:"Log in", e_login:"Wrong password. Try again.",
+      hint:"First password: mnh76. Change it after logging in.",
+      stat_total:"Total records", stat_today:"Today",
+      search_ph:"Search name, father's name or number",
+      export:"Download CSV", clear:"Delete all", logout:"Log out",
+      th_name:"Name", th_father:"Father's name", th_phone:"Number", th_date:"Date",
+      del:"Delete", empty_none:"No records yet. Add the first one from the form.",
+      empty_search:"No record matches this search.",
+      confirm_del:"Delete the record for {n}?",
+      confirm_clear:"All records will be deleted. Are you sure?",
+      nothing_export:"There are no records to download.",
+      pass_title:"Change password", pass_ph:"New password (at least 4 characters)", pass_btn:"Change",
+      pass_short:"Use at least 4 characters.", pass_ok:"Password changed.",
+      close:"Close", footer:"MNH76 · Husnain", lang_btn:"اردو",
+      dev:"Developed by Shani", nav_services:"Services",
+      svc_title:"Shani, Website Developer", svc_simple:"Simple website", svc_pro:"Professional website", svc_host:"Hosting"
+    },
+    ur:{
+      nav_home:"ہوم", nav_register:"رجسٹر", nav_panel:"کنٹرول پینل",
+      welcome:"خوش آمدید", name:"حسنین",
+      lead:"ڈیولپر شانی کی طرف سے خوش آمدید",
+      scroll:"سکرول کریں", caption:"میکینیکل انجینئرنگ کا طالب علم",
+      reg_title:"اپنی معلومات درج کریں", reg_sub:"اپنا نام، والد کا نام اور نمبر لکھیں۔",
+      f_name:"نام", f_father:"والد کا نام", f_phone:"نمبر",
+      ph_name:"پورا نام", ph_father:"والد کا پورا نام", save:"محفوظ کریں",
+      e_name:"اپنا نام لکھیں۔", e_father:"والد کا نام لکھیں۔",
+      e_phone:"درست نمبر لکھیں، جیسے 03001234567۔",
+      saved:"محفوظ ہو گیا۔ شکریہ، {n}۔",
+      save_fail:"براؤزر محفوظ نہیں کر سکا۔ اس صفحے کو براؤزر میں فائل کی طرح کھول کر دوبارہ کوشش کریں۔",
+      panel_title:"کنٹرول پینل", login_sub:"جاری رکھنے کے لیے پاسورڈ لکھیں۔",
+      password:"پاسورڈ", login:"لاگ اِن", e_login:"پاسورڈ غلط ہے۔ دوبارہ لکھیں۔",
+      hint:"پہلا پاسورڈ: mnh76۔ لاگ اِن کے بعد اسے بدل لیں۔",
+      stat_total:"کل ریکارڈ", stat_today:"آج کے",
+      search_ph:"نام، والد کا نام یا نمبر تلاش کریں",
+      export:"CSV ڈاؤن لوڈ", clear:"سب مٹائیں", logout:"لاگ آؤٹ",
+      th_name:"نام", th_father:"والد کا نام", th_phone:"نمبر", th_date:"تاریخ",
+      del:"مٹائیں", empty_none:"ابھی کوئی ریکارڈ نہیں۔ فارم سے پہلا ریکارڈ شامل کریں۔",
+      empty_search:"اس تلاش سے کوئی ریکارڈ نہیں ملا۔",
+      confirm_del:"{n} کا ریکارڈ مٹانا ہے؟",
+      confirm_clear:"تمام ریکارڈ مٹ جائیں گے۔ کیا آپ کو یقین ہے؟",
+      nothing_export:"ڈاؤن لوڈ کرنے کے لیے کوئی ریکارڈ نہیں۔",
+      pass_title:"پاسورڈ بدلیں", pass_ph:"نیا پاسورڈ (کم از کم 4 حروف)", pass_btn:"بدلیں",
+      pass_short:"کم از کم 4 حروف رکھیں۔", pass_ok:"پاسورڈ بدل گیا۔",
+      close:"بند کریں", footer:"MNH76 · حسنین", lang_btn:"English",
+      dev:"ڈیولپ کردہ: شانی", nav_services:"سروسز",
+      svc_title:"شانی، ویب سائٹ ڈیولپر", svc_simple:"سادہ ویب سائٹ", svc_pro:"پروفیشنل ویب سائٹ", svc_host:"ہوسٹنگ"
+    }
+  };
+
+  /* ---------- Storage ---------- */
+  var KEY_R = 'mnh76_records', KEY_P = 'mnh76_pass', KEY_L = 'mnh76_lang';
+  var mem = {};
+  var store = {
+    get:function(k,d){
+      try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }
+      catch(e){ return (k in mem) ? mem[k] : d; }
+    },
+    set:function(k,v){
+      mem[k] = v;
+      try{ localStorage.setItem(k, JSON.stringify(v)); return true; }
+      catch(e){ return false; }
+    }
+  };
+  function records(){ return store.get(KEY_R, []); }
+  function pass(){ return store.get(KEY_P, 'mnh76'); }
+
+  /* ---------- Helpers ---------- */
+  function $(id){ return document.getElementById(id); }
+  var lang = store.get(KEY_L, 'en');
+  if(lang !== 'en' && lang !== 'ur') lang = 'en';
+  function t(k, vars){
+    var s = T[lang][k] || T.en[k] || k;
+    if(vars) for(var v in vars) s = s.replace('{' + v + '}', vars[v]);
+    return s;
+  }
+
+  /* ---------- Language ---------- */
+  function applyLang(){
+    var h = document.documentElement;
+    h.lang = lang;
+    h.dir = lang === 'ur' ? 'rtl' : 'ltr';
+    document.querySelectorAll('[data-i18n]').forEach(function(el){ el.textContent = t(el.getAttribute('data-i18n')); });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){ el.placeholder = t(el.getAttribute('data-i18n-ph')); });
+    document.querySelectorAll('[data-i18n-aria]').forEach(function(el){ el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria'))); });
+    $('langBtn').textContent = t('lang_btn');
+    ['regMsg','passMsg'].forEach(function(id){ $(id).textContent = ''; });
+    ['eName','eFather','ePhone','eLogin'].forEach(function(id){ $(id).textContent = ''; });
+    if(loggedIn) renderRows();
+  }
+  $('langBtn').addEventListener('click', function(){
+    lang = lang === 'en' ? 'ur' : 'en';
+    store.set(KEY_L, lang);
+    applyLang();
+  });
+
+  /* ---------- Scroll letters ---------- */
+  var sec = $('letters'), stick = $('stick'), caption = $('caption');
+  var glyphs = Array.prototype.slice.call(document.querySelectorAll('.g'));
+  var dots = Array.prototype.slice.call(document.querySelectorAll('.dots i'));
+  var TH = [0.08, 0.25, 0.42, 0.59, 0.76];
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ticking = false;
+  function updateLetters(){
+    ticking = false;
+    var total = sec.offsetHeight - window.innerHeight;
+    var p = reduce ? 1 : Math.min(1, Math.max(0, -sec.getBoundingClientRect().top / Math.max(1, total)));
+    var lit = 0;
+    glyphs.forEach(function(g, i){
+      var on = p > TH[i] || reduce;
+      g.classList.toggle('on', on);
+      dots[i].classList.toggle('on', on);
+      if(on) lit++;
+    });
+    stick.style.setProperty('--lit', lit);
+    $('brandTxt').textContent = 'MNH76'.slice(0, lit);
+    caption.classList.toggle('show', p > 0.9 || reduce);
+  }
+  function onScroll(){ if(!ticking){ ticking = true; requestAnimationFrame(updateLetters); } }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('resize', onScroll);
+  updateLetters();
+
+  /* ---------- Register ---------- */
+  function setErr(id, key){ $(id).textContent = key ? t(key) : ''; }
+  $('regForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = $('fName').value.trim();
+    var father = $('fFather').value.trim();
+    var phone = $('fPhone').value.trim().replace(/[\s\-()]/g, '');
+    var ok = true;
+    setErr('eName'); setErr('eFather'); setErr('ePhone');
+    if(name.length < 2){ setErr('eName', 'e_name'); ok = false; }
+    if(father.length < 2){ setErr('eFather', 'e_father'); ok = false; }
+    if(!/^\+?\d{10,15}$/.test(phone)){ setErr('ePhone', 'e_phone'); ok = false; }
+    if(!ok) return;
+    var list = records();
+    list.unshift({id:Date.now(), name:name, father:father, phone:phone, at:new Date().toISOString()});
+    var saved = store.set(KEY_R, list);
+    var m = $('regMsg');
+    m.className = 'msg ' + (saved ? 'ok' : 'bad');
+    m.textContent = saved ? t('saved', {n:name}) : t('save_fail');
+    if(saved) $('regForm').reset();
+  });
+
+  /* ---------- Drawer ---------- */
+  var loggedIn = false;
+  var drawer = $('drawer'), scrim = $('scrim');
+  function openDrawer(){
+    drawer.classList.add('open'); scrim.classList.add('open');
+    drawer.setAttribute('aria-hidden', 'false');
+    renderAdmin();
+    setTimeout(function(){ $('closeBtn').focus(); }, 60);
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open'); scrim.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    $('panelBtn').focus();
+  }
+  $('panelBtn').addEventListener('click', openDrawer);
+  $('closeBtn').addEventListener('click', closeDrawer);
+  scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+  });
+
+  function renderAdmin(){
+    $('login').hidden = loggedIn;
+    $('dash').hidden = !loggedIn;
+    if(loggedIn) renderRows();
+  }
+  $('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    if($('lPass').value === pass()){
+      loggedIn = true; $('lPass').value = ''; setErr('eLogin'); renderAdmin();
+    } else {
+      setErr('eLogin', 'e_login');
+    }
+  });
+  $('logoutBtn').addEventListener('click', function(){ loggedIn = false; renderAdmin(); });
+
+  function fmtDate(iso){
+    var d = new Date(iso);
+    return d.toLocaleDateString('en-GB', {day:'2-digit', month:'short', year:'numeric'}) + ' ' +
+           d.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'});
+  }
+  function cell(text, cls){
+    var td = document.createElement('td');
+    if(cls) td.className = cls;
+    td.textContent = text;
+    return td;
+  }
+  function renderRows(){
+    var all = records();
+    var q = $('search').value.trim().toLowerCase();
+    var list = !q ? all : all.filter(function(r){
+      return (r.name + ' ' + r.father + ' ' + r.phone).toLowerCase().indexOf(q) !== -1;
+    });
+    $('sTotal').textContent = all.length;
+    $('sToday').textContent = all.filter(function(r){ return new Date(r.at).toDateString() === new Date().toDateString(); }).length;
+
+    var tb = $('rows');
+    tb.textContent = '';
+    list.forEach(function(r, i){
+      var tr = document.createElement('tr');
+      tr.appendChild(cell(String(list.length - i), 'num'));
+      tr.appendChild(cell(r.name));
+      tr.appendChild(cell(r.father));
+      tr.appendChild(cell(r.phone, 'ph'));
+      tr.appendChild(cell(fmtDate(r.at)));
+      var td = document.createElement('td');
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'del'; b.textContent = t('del');
+      b.addEventListener('click', function(){
+        if(confirm(t('confirm_del', {n:r.name}))){
+          store.set(KEY_R, records().filter(function(x){ return x.id !== r.id; }));
+          renderRows();
+        }
+      });
+      td.appendChild(b); tr.appendChild(td); tb.appendChild(tr);
+    });
+    var em = $('empty');
+    em.hidden = list.length > 0;
+    em.textContent = all.length ? t('empty_search') : t('empty_none');
+  }
+  $('search').addEventListener('input', renderRows);
+
+  $('exportBtn').addEventListener('click', function(){
+    var list = records();
+    if(!list.length){ alert(t('nothing_export')); return; }
+    function q(s){ return '"' + String(s).replace(/"/g, '""') + '"'; }
+    var lines = ['Name,Father Name,Number,Date'];
+    list.forEach(function(r){
+      lines.push([q(r.name), q(r.father), '="' + r.phone + '"', q(fmtDate(r.at))].join(','));
+    });
+    var blob = new Blob(['\ufeff' + lines.join('\n')], {type:'text/csv;charset=utf-8;'});
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob); a.download = 'mnh76-records.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); }, 1000);
+  });
+  $('clearBtn').addEventListener('click', function(){
+    if(!records().length) return;
+    if(confirm(t('confirm_clear'))){ store.set(KEY_R, []); renderRows(); }
+  });
+  $('passForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var p = $('newPass').value, m = $('passMsg');
+    if(p.length < 4){ m.className = 'msg bad'; m.textContent = t('pass_short'); return; }
+    store.set(KEY_P, p);
+    $('newPass').value = '';
+    m.className = 'msg ok'; m.textContent = t('pass_ok');
+  });
+
+  applyLang();
+})();
+</script>
+</body>
+</html>
